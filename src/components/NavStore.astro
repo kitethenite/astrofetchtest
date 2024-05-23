@@ -1,9 +1,9 @@
 ---
 import NavSub from "./NavSub.astro";
-const { data} = Astro.props;
+const { data } = Astro.props;
 
 const subcategories = await fetch(
-  "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/subcategories?",
+  "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/subcategories",
   {
     method: "GET",
     headers: {
@@ -13,10 +13,22 @@ const subcategories = await fetch(
   }
 ).then((res) => res.json());
 
-
-
 ---
 
+<ul>
+  <li class="category">
+    <p>{data.category}</p>
+    <ul class="subcategory">
+      <li>
+        {
+          subcategories
+            .filter(sub => sub.category_id === data.id)
+            .map(sub => <NavSub data={sub} />)
+        }
+      </li>
+    </ul>
+  </li>
+</ul>
 
 <style>
   .category {
@@ -70,24 +82,3 @@ const subcategories = await fetch(
     display: inherit;
   }
 </style>
-
-
-<ul>
-  <li class="category">
-    <p>{data.category}</p>
-    <ul class="subcategory">
-      <li>
-        {
-          subcategories.map((data) => {
-            return <NavSub data={data} />;
-          })
-        }
-      </li>
-    </ul>
-  </li>
-</ul>
-
-
-<script>
-  const filter = 
-</script>

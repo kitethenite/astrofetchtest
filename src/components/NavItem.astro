@@ -1,19 +1,9 @@
 ---
 const { data } = Astro.props;
 
-
-// export function getStaticPaths() {
-//   return [
-//     { params: { id: "1" } },
-//     { params: { id: "2" } },
-//     { params: { id: "3" } },
-//   ];
-// }
-
-// const { id } = Astro.params;
 ---
 
-<a href=`${data.subcategory_name}/${data.slug}`>{data.name}</a>
+<li><a href={`/${data.subcategory_name}/${data.slug}`}>{data.name}</a></li>
 
 <style>
   a:hover {

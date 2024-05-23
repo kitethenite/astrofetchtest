@@ -18,9 +18,9 @@ const items = await fetch(
 <ul class="items">
   <li>
     {
-      items.map((data) => {
-        return <NavItem data={data} />;
-      })
+      items
+        .filter(item => item.subcategory_id === data.id)
+        .map(item => <NavItem data={item} />)
     }
   </li>
 </ul>
