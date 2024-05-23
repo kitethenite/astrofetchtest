@@ -1,0 +1,54 @@
+---
+import NavStore from "./NavStore.astro";
+
+const data = await fetch(
+  "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/categories?order=id.asc",
+  {
+    method: "GET",
+    headers: {
+      apikey:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRocnlod2Nydmx6bG51dWN4aHFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYyMTIxNzUsImV4cCI6MjAzMTc4ODE3NX0.qe83qKHMa9-0Tc3HFWEqgvYa_LKMiI267dutJ7DxWs0",
+    },
+  }
+).then((res) => res.json());
+---
+
+<header>
+  <nav>
+    <a href="/" class="logo"><img src="" alt="logo" /></a>
+
+    <ul class="topnav">
+      <li><a href="#">Pre-order</a></li>
+      <li><a href="">Reparation</a></li>
+      <li><a href="">Sælg og byt</a></li>
+      <li><a href="product-list">Om os</a></li>
+    </ul>
+
+    <div class="storenav">
+      {
+        data.map((data) => {
+          return <NavStore data={data} />;
+        })
+      }
+    </div>
+  </nav>
+</header>
+
+<style>
+  .topnav {
+    list-style: none;
+    display: flex;
+    gap: 2em;
+  }
+  .storenav {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 1040px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 2em;
+  }
+</style>
+
+<!-- dropdown menu tutorial here: https://webdesignerhut.com/css-dropdown-menu/  -->

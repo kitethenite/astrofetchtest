@@ -1,0 +1,93 @@
+---
+import NavSub from "./NavSub.astro";
+const { data} = Astro.props;
+
+const subcategories = await fetch(
+  "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/subcategories?",
+  {
+    method: "GET",
+    headers: {
+      apikey:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRocnlod2Nydmx6bG51dWN4aHFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYyMTIxNzUsImV4cCI6MjAzMTc4ODE3NX0.qe83qKHMa9-0Tc3HFWEqgvYa_LKMiI267dutJ7DxWs0",
+    },
+  }
+).then((res) => res.json());
+
+
+
+---
+
+
+<style>
+  .category {
+    padding: 1em 2em;
+    max-width: 150px;
+    width: auto;
+    margin: auto;
+    background-color: red;
+    color: white;
+  }
+
+  .category:hover {
+    background-color: orangered;
+  }
+
+  ul,
+  li {
+    list-style: none;
+    display: grid;
+    gap: 20px;
+    position: relative;
+  }
+
+  a,
+  .subcategory {
+    background-color: aquamarine;
+    padding: 1em 2em;
+    border: solid 1px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    background-color: blue;
+    color: white;
+  }
+
+  .subcategory {
+    list-style: none;
+    padding: 1em;
+    display: grid;
+    gap: 1em;
+  }
+
+  ul ul {
+    position: absolute;
+    top: 100%;
+    display: none;
+  }
+
+  ul li:hover > ul {
+    display: inherit;
+  }
+</style>
+
+
+<ul>
+  <li class="category">
+    <p>{data.category}</p>
+    <ul class="subcategory">
+      <li>
+        {
+          subcategories.map((data) => {
+            return <NavSub data={data} />;
+          })
+        }
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+<script>
+  const filter = 
+</script>

@@ -1,0 +1,48 @@
+---
+import NavSub from "../NavSub.astro";
+const { data } = Astro.props;
+
+const subcategory = await fetch(
+  "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/subcategories",
+  {
+    method: "GET",
+    headers: {
+      apikey:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRocnlod2Nydmx6bG51dWN4aHFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYyMTIxNzUsImV4cCI6MjAzMTc4ODE3NX0.qe83qKHMa9-0Tc3HFWEqgvYa_LKMiI267dutJ7DxWs0",
+    },
+  }
+).then((res) => res.json());
+console.log(subcategory);
+---
+
+<div class="category">
+  <a href=`/brand/${data.category}`>{data.category}</a>
+
+  <div class="subcategory">
+    {
+      subcategory.map((data) => {
+        return <NavSub data={data} />;
+      })
+    }
+  </div>
+</div>
+
+<style>
+  a {
+    background-color: aquamarine;
+    padding: 1em 2em;
+    border: solid 1px;
+  }
+
+  .subcategory {
+    list-style: none;
+    padding: 1em;
+    display: grid;
+    gap: 1em;
+
+    
+  }
+
+
+
+</style>

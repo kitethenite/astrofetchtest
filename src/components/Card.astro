@@ -1,0 +1,24 @@
+---
+const { header } = Astro.props;
+// header er til for hvis jeg vil ændre navn på en header i en card under pages, så kan jeg skrive det som <h2 header="ny titel her">
+---
+
+<article class="card">
+  <img src="" alt="" />
+  <h2>{header}</h2>
+  <p></p>
+  <p class="price"></p>
+  <slot />
+</article>
+
+<style>
+  img {
+    width: 300px;
+  }
+  article {
+    background-color: red;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2em;
+  }
+</style>

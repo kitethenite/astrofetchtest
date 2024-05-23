@@ -1,0 +1,52 @@
+---
+import NavItem from "./NavItem.astro";
+const { data } = Astro.props;
+
+const items = await fetch(
+  "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/items",
+  {
+    method: "GET",
+    headers: {
+      apikey:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRocnlod2Nydmx6bG51dWN4aHFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYyMTIxNzUsImV4cCI6MjAzMTc4ODE3NX0.qe83qKHMa9-0Tc3HFWEqgvYa_LKMiI267dutJ7DxWs0",
+    },
+  }
+).then((res) => res.json());
+---
+
+<a href=`/${data.slug}`>{data.name}</a>
+<ul class="items">
+  <li>
+    {
+      items.map((data) => {
+        return <NavItem data={data} />;
+      })
+    }
+  </li>
+</ul>
+
+<style>
+  a:hover {
+    background-color: blue;
+    color: white;
+  }
+
+  li {
+    list-style: none;
+    display: grid;
+    gap: 20px;
+    position: relative;
+    left: 150%;
+    top: -20%;
+  }
+
+  ul {
+    position: absolute;
+
+    /* display: none;  */
+  }
+
+  ul li:hover > ul {
+    display: inherit;
+  }
+</style>
