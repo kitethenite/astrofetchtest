@@ -1,6 +1,5 @@
 ---
 import NavStore from "./NavStore.astro";
-
 const data = await fetch(
   "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/categories?order=id.asc",
   {
@@ -14,15 +13,30 @@ const data = await fetch(
 ---
 
 <header>
+  <div class="icon"></div>
   <nav>
-    <a href="/" class="logo"><img src="" alt="logo" /></a>
+    <div class="top">
+      <div class="logo">
+        <a href="/"><img src="/logo.svg" alt="logo" /></a>
+      </div>
 
-    <ul class="topnav">
-      <li><a href="#">Pre-order</a></li>
-      <li><a href="">Reparation</a></li>
-      <li><a href="">Sælg og byt</a></li>
-      <li><a href="product-list">Om os</a></li>
-    </ul>
+      <ul class="topnav">
+        <li><a href="">Pre-order</a></li>
+        <li><a href="">Reparation</a></li>
+        <li><a href="">Sælg og byt</a></li>
+        <li><a href=`product-list`>Om os</a></li>
+      </ul>
+      <div class="userarea">
+        <a href="">
+          <img src="/search.svg" alt="search button" /></a>
+        <a href="">
+          <img src="/profile.svg" alt="profile button" />
+        </a>
+        <a href="">
+          <img src="/basket.svg" alt="shopping basket button" />
+        </a>
+      </div>
+    </div>
 
     <div class="storenav">
       {
@@ -35,19 +49,47 @@ const data = await fetch(
 </header>
 
 <style>
+
+  header {
+    background-color: rgb(218, 218, 255);
+    display: grid;
+    grid-template-columns: auto 1040px auto;
+
+  }
+
+  nav {
+    grid-column: 2;
+    justify-content: center;
+  }
+
+  .top {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+  }
+  
   .topnav {
     list-style: none;
     display: flex;
     gap: 2em;
+    grid-column: 2;
+    justify-content: center;
+  }
+
+  .userarea {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: end;
   }
   .storenav {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     max-width: 1040px;
-    justify-content: center;
+    width: 100%;
+    gap: 2em;
+    justify-content: space-between;
     align-items: center;
-    margin: auto;
-    padding: 2em;
+text-align: center;
   }
 </style>
 

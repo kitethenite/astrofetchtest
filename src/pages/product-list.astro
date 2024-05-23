@@ -1,11 +1,11 @@
 ---
 import Productlist from "../components/Productlist.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+import NavItem from "../components/NavItem.astro";
 import "../styles/styles.css";
-import Card from "../components/Card.astro";
 
 const data = await fetch(
-"https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/products?select=*,item:items(*,subcategory:subcategories(*,category:categories(*)))",
+"https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/products",
   {
     method: "GET",
     headers: {
@@ -17,11 +17,7 @@ const data = await fetch(
 // console.log(data)
 ---
 
-<MainLayout headliner="This is the first page">
-  <h2>here is a h2er</h2>
-  <!-- <Card header="This is header" /> -->
-  <!-- <Card header="This is card 2"/>
-  <Card header="This is third card"/> -->
+<MainLayout headliner="This is the product list">
 
   <section class="products">
     {
@@ -35,7 +31,14 @@ const data = await fetch(
 <style>
   .products {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 2em;
+    width: 100%;
+    max-width: 1040px;
+
+    margin: auto;
+    justify-content: center;
+    
+    padding: 5rem 0;
   }
 </style>
