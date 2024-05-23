@@ -1,0 +1,29 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+
+
+
+export async function getStaticPaths() {
+  const data = await fetch(
+    "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/items",
+    {
+      method: "GET",
+      headers: {
+        apikey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRocnlod2Nydmx6bG51dWN4aHFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYyMTIxNzUsImV4cCI6MjAzMTc4ODE3NX0.qe83qKHMa9-0Tc3HFWEqgvYa_LKMiI267dutJ7DxWs0",
+      },
+    }
+  ).then((response) => response.json());
+
+  return data.map((store) => {
+    return {
+      params: { slugshop: store.slug },
+      props: { store:store },
+    };
+  });
+}
+
+const { store } = Astro.props;
+
+console.log(store)
+---

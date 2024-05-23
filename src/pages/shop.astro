@@ -1,0 +1,44 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import NavItem from "../components/NavItem.astro";
+import "../styles/styles.css";
+import ProductList from "./product-list.astro";
+
+const data = await fetch(
+"https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/items",
+  {
+    method: "GET",
+    headers: {
+      apikey:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRocnlod2Nydmx6bG51dWN4aHFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYyMTIxNzUsImV4cCI6MjAzMTc4ODE3NX0.qe83qKHMa9-0Tc3HFWEqgvYa_LKMiI267dutJ7DxWs0",
+    },
+  }
+).then((res) => res.json());
+console.log(data)
+---
+
+<MainLayout headliner="This is the items list">
+<ProductList />
+  <section class="items">
+    {
+      data.map((data) => {
+        return <NavItem data={data} />;
+      })
+    }
+  </section>
+</MainLayout>
+
+<style>
+  .items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2em;
+    width: 100%;
+    max-width: 1040px;
+
+    margin: auto;
+    justify-content: center;
+    
+    padding: 5rem 0;
+  }
+</style>
