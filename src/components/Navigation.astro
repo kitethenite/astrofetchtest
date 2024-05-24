@@ -12,85 +12,97 @@ const data = await fetch(
 ).then((res) => res.json());
 ---
 
-<header>
-  <div class="icon"></div>
-  <nav>
-    <div class="top">
-      <div class="logo">
-        <a href="/"><img src="/logo.svg" alt="logo" /></a>
-      </div>
-
-      <ul class="topnav">
-        <li><a href="">Pre-order</a></li>
-        <li><a href="">Reparation</a></li>
-        <li><a href="">Sælg og byt</a></li>
-        <li><a href=`product-list`>Om os</a></li>
-      </ul>
-      <div class="userarea">
-        <a href="">
-          <img src="/search.svg" alt="search button" /></a>
-        <a href="">
-          <img src="/profile.svg" alt="profile button" />
-        </a>
-        <a href="">
-          <img src="/basket.svg" alt="shopping basket button" />
-        </a>
-      </div>
+<nav>
+  <div class="top">
+    <div class="logo">
+      <a href="/"><img src="/logo.svg" alt="logo" /></a>
     </div>
 
-    <div class="storenav">
-      {
-        data.map((data) => {
-          return <NavStore data={data} />;
-        })
-      }
+    <ul class="topnav">
+      <li><a href="/">Pre-order</a></li>
+      <li><a href="/">Reparation</a></li>
+      <li><a href="/">Sælg og byt</a></li>
+      <li><a href="/">Om os</a></li>
+    </ul>
+    <div class="userarea">
+      <a href="">
+        <img src="/search.svg" alt="search button" />
+      </a>
+      <a href="">
+        <img src="/profile.svg" alt="profile button" />
+      </a>
+      <a href="">
+        <img src="/basket.svg" alt="shopping basket button" />
+      </a>
     </div>
-  </nav>
-</header>
+  </div>
+
+  <div class="storenav">
+    {
+      data.map((data) => {
+        return <NavStore data={data} />;
+      })
+    }
+  </div>
+</nav>
 
 <style>
-
-  header {
-    background-color: rgb(218, 218, 255);
-    display: grid;
-    grid-template-columns: auto 1040px auto;
-
-  }
-
   nav {
-    grid-column: 2;
-    justify-content: center;
-  }
-
-  .top {
+    padding: 1rem 0 5rem;
+    font-family: var(--font-family-primary);
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr;
+  }
+  .top {
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
     align-items: center;
   }
-  
+
   .topnav {
     list-style: none;
     display: flex;
-    gap: 2em;
+    gap: 2rem;
     grid-column: 2;
-    justify-content: center;
+    padding: 0 6rem;
+    justify-content: space-around;
   }
 
+  a {
+    text-decoration: none;
+    font-size: var(--font-size-md);
+
+    color: var(--secondary-color);
+    letter-spacing: 0.5px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+  }
+
+  a:active {
+    text-decoration: underline;
+  }
   .userarea {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: end;
+    align-items: center;
+    height: 24px;
   }
+
+  .userarea img:hover {
+    filter: invert(31%) sepia(99%) saturate(1524%) hue-rotate(348deg)
+      brightness(89%) contrast(91%);
+  }
+
   .storenav {
+    padding: 2rem 0 0;
+    grid-row: 2;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    max-width: 1040px;
-    width: 100%;
     gap: 2em;
-    justify-content: space-between;
-    align-items: center;
-text-align: center;
   }
 </style>
-
-<!-- dropdown menu tutorial here: https://webdesignerhut.com/css-dropdown-menu/  -->

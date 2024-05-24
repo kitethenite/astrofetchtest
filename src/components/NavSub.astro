@@ -1,5 +1,4 @@
 ---
-import NavItem from "./NavItem.astro";
 const { data } = Astro.props;
 
 const items = await fetch(
@@ -14,39 +13,74 @@ const items = await fetch(
 ).then((res) => res.json());
 ---
 
-<a href=`/${data.slug}`>{data.name}</a>
+<a href=`/${data.slug}` class="subcategory">{data.name}</a>
 <ul class="items">
-  <li>
-    {
-      items
-        .filter(item => item.subcategory_id === data.id)
-        .map(item => <NavItem data={item} />)
-    }
-  </li>
+  {
+    items
+      .filter((item) => item.subcategory_id === data.id)
+      .map((item) => (
+        <li>
+          <a href={`/${data.slug}/${item.slug}`}>{item.name}</a>
+        </li>
+      ))
+  }
 </ul>
 
 <style>
-  a:hover {
-    background-color: blue;
-    color: white;
+  /******** STYLING SUBCATEGORIES *********/
+
+  .subcategory, a {
+    text-decoration: none;
+    color: var(--primary-color);
+    display: block;
+    background-color: var(--hover-color);
+    height: 40px;
+    line-height: 40px;
+    padding: 0 0 0 1rem;
+
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-light);
   }
 
-  li {
+  .subcategory:hover, a:hover {
+    background-color: var(--secondary-accent);
+  }
+
+  /****** STYLING SUB-SUBCATEGORIES (ITEMS) */
+
+  .items {
     list-style: none;
-    display: grid;
-    gap: 20px;
-    position: relative;
-    left: 150%;
-    top: -20%;
+    position: absolute; 
+    left: 100%; 
+    z-index: 2;
+    top: -1px;
+    display: none;
+    width: 100%;
   }
 
-  ul {
-    position: absolute;
+  .items li {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
 
-    /* display: none;  */
+    border-bottom: 1px solid black;
+
+  }
+  .items li:first-child {
+    border-top: 1px solid black;
   }
 
-  ul li:hover > ul {
+  /* the plus means that when a.subcategory is being hovered, it's adjacent sibling, which is div.item, will also inherit the display */
+  .subcategory:hover + .items {
     display: inherit;
   }
+
+  .items:hover{
+    display: block;
+  }
+
+
+
+  /****** hierarkin på denna är ul.items > li > a */
 </style>

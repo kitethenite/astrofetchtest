@@ -1,0 +1,16 @@
+---
+import Page from '../components/Page.astro';
+import Post from '../components/Post.astro';
+
+export async function getStaticPaths() {
+	return [{
+		params: { name: 'cookies' },
+		props: {type: 'page'},
+	}, {
+		params: { name: 'post-1' },
+		props: {type: 'post'},
+	}]
+}
+
+---
+{ Astro.props.type === 'post' ? <Post {...Astro.props} /> : <Page {...Astro.props} /> }
