@@ -1,5 +1,4 @@
 ---
-
 //mapping og data fetching video af Jonas
 
 import SubItem from "../components/SubItem.astro";
@@ -21,8 +20,8 @@ const data = await fetch(
 <MainLayout>
   <section class="items">
     {
-      data.map((item) => {
-        return <SubItem item={item} />;
+      data.map((items) => {
+        return <SubItem item={items} />;
       })
     }
   </section>

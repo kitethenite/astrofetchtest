@@ -1,5 +1,8 @@
 ---
+// src/pages/[test].astro
+
 // getStaticPaths video af Jonas
+
 import SubItem from "../components/SubItem.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 
@@ -13,7 +16,7 @@ export async function getStaticPaths() {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRocnlod2Nydmx6bG51dWN4aHFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYyMTIxNzUsImV4cCI6MjAzMTc4ODE3NX0.qe83qKHMa9-0Tc3HFWEqgvYa_LKMiI267dutJ7DxWs0",
       },
     }
-  ).then((response) => response.json());
+  ).then((res) => res.json());
 
   return data.map((subName) => {
     return {
@@ -46,14 +49,13 @@ const { subName } = Astro.props;
         .filter((item) => item.subcategory_id === subName.id)
         .map((item) => {
           return (
-            <div key={item.id}>
+            <div>
               <a href={`${subName.slug}/${item.slug}`}>
                 <SubItem item={item} />
                 {item.name}
               </a>
             </div>
           );
-        })
-    }
+        })}
   </section>
 </MainLayout>
