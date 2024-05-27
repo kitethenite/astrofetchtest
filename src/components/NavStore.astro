@@ -21,7 +21,7 @@ const subcategories = await fetch(
       <p>{data.category}</p>
     </div>
     <ul class="subcategories">
-      {
+      <a href="../sub">  {
         subcategories
           .filter((sub) => sub.category_id === data.id)
           .map((sub) => (
@@ -29,7 +29,8 @@ const subcategories = await fetch(
               <NavSub data={sub} />
             </li>
           ))
-      }
+      }</a>
+    
     </ul>
   </li>
 </ul>

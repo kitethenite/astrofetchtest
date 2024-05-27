@@ -1,0 +1,34 @@
+---
+import SubItem from "../components/SubItem.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+
+const data = await fetch(
+  "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/items",
+  {
+    method: "GET",
+    headers: {
+      apikey:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRocnlod2Nydmx6bG51dWN4aHFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYyMTIxNzUsImV4cCI6MjAzMTc4ODE3NX0.qe83qKHMa9-0Tc3HFWEqgvYa_LKMiI267dutJ7DxWs0",
+    },
+  }
+).then((res) => res.json());
+// console.log(data);
+---
+
+<MainLayout>
+  <section class="items">
+    {
+      data.map((item) => {
+        return <SubItem item={item} />;
+      })
+    }
+  </section>
+</MainLayout>
+
+<style>
+    section {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 0 5rem;
+    }
+</style>

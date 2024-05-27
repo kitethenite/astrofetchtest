@@ -1,10 +1,9 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
 
-
 export async function getStaticPaths() {
   const data = await fetch(
-    "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/subcategories",
+    "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/products",
     {
       method: "GET",
       headers: {
@@ -14,32 +13,36 @@ export async function getStaticPaths() {
     }
   ).then((response) => response.json());
 
-  return data.map((subcategory) => {
+  return data.map((product) => {
     return {
-      params: { slug: subcategory.slug },
-      props: { subcategories: subcategory },
+      params: { slug: product.slug },
+      props: { products: product },
     };
   });
 }
 
-const { subcategories } = Astro.props;
- 
-
+const { products } = Astro.props;
 ---
 
-<MainLayout headliner={subcategories.name}>
+<MainLayout headliner={products.title}>
   <div class="product-info">
-    <h1>{subcategories.name}</h1>
-
+    <h1>{products.title}</h1>
+    <img src={products.image} alt="" />
+    <h2>{products.title}</h2>
+    <p>{products.description}</p>
+    <p>{products.price} DKK</p>
   </div>
 </MainLayout>
 
 <style>
   .product-info {
     background-color: brown;
-max-width: 1040px;
+    max-width: 1040px;
     border: solid;
     padding: 2em;
   }
 
+  img {
+    width: 100%;
+  }
 </style>

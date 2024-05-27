@@ -1,11 +1,9 @@
 ---
-import MainLayout from "../../layouts/MainLayout.astro";
-
-
+import MainLayout from '../layouts/MainLayout.astro';
 
 export async function getStaticPaths() {
   const data = await fetch(
-    "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/items",
+    "https://thryhwcrvlzlnuucxhqk.supabase.co/rest/v1/subcategories",
     {
       method: "GET",
       headers: {
@@ -15,15 +13,18 @@ export async function getStaticPaths() {
     }
   ).then((response) => response.json());
 
-  return data.map((store) => {
+  return data.map((items) => {
     return {
-      params: { slugshop: store.slug },
-      props: { store:store },
+      params: { test: items.slug },
+      props: { items },
     };
   });
 }
 
-const { store } = Astro.props;
-
-console.log(store)
+const { items }= Astro.props;
+console.log(items)
 ---
+
+<MainLayout>
+    <h1>{items.slug}</h1>
+</MainLayout>
